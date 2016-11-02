@@ -16,7 +16,8 @@ public class ActionStrategyHashMapper {
         // to the strategy object responsible with handling the associated request
     	// example : actionStrategyMapper.put(RequestedAction.CHECK_ACCESS,new CheckUserStrategy());
     	actionStrategyMapper.put(RequestedAction.GIVE_LOCATION, new GiveLocationStrategy());
-        //////ADD more when implement new request - response
+    	actionStrategyMapper.put(RequestedAction.GET_CLIENTS_FOR_SUPERVISOR, new GetClientsForSupervisorStrategy());
+    	//////ADD more when implement new request - response
     }
 	
 	

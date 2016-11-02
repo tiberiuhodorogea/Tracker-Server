@@ -5,4 +5,5 @@ package SharedClasses.Communication;
  */
 public enum RequestedAction {
 	GIVE_LOCATION,
+	GET_CLIENTS_FOR_SUPERVISOR,
 }
