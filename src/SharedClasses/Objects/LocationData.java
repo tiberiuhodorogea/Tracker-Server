@@ -17,6 +17,13 @@ public class LocationData extends Sendable {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+    
+    public LocationData(int date, double latitude,double longitude, String clientName, int clientId){
+        super(date,clientName,clientId);
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+    
     public LocationData(double latitude,double longitude, String clientName){
         super(DateUtil.nowIntFormat(),clientName,0);
         this.latitude = latitude;
@@ -30,12 +37,6 @@ public class LocationData extends Sendable {
         return latitude;
     }
 
-    public int getDate() {
-		return date;
-	}
-	public void setDate(int date) {
-		this.date = date;
-	}
 	public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
@@ -47,16 +48,16 @@ public class LocationData extends Sendable {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
-    public String getclientName(){
-    	return clientName;
-    }
-    public void setclientName(String clientName){
-    	this.clientName = clientName;
-    }
-	public int getClientId() {
-		return clientId;
+  
+	
+	
+	@Override
+	public String toString() {
+		 String ret = "Latitude = " + latitude +"\n";
+	        ret += "Longitude = "+ longitude +"\n";
+	        ret += "Date = " + DateUtil.fromIntFormat(date) +"\n";
+	        ret += "Name = " + this.clientName;
+	        return ret;
 	}
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
-	}
+	
 }

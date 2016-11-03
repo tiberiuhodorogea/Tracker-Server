@@ -6,4 +6,6 @@ package SharedClasses.Communication;
 public enum RequestedAction {
 	GIVE_LOCATION,
 	GET_CLIENTS_FOR_SUPERVISOR,
+	GET_LATEST_LOCATION_OF_CLIENT,
+	GIVE_RECEIVED_SMS,
 }

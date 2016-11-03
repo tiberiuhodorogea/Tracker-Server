@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 public class GetClientsForSupervisorStrategy implements HandlingStrategy {
 
-	ArrayList<String> ret = new ArrayList<String>();
+	
 	
 	@Override
 	public Object handle(Object dataFromClient) {
+		ArrayList<String> ret = new ArrayList<String>();
 		String supervisor = (String) dataFromClient;
 		try {
 			Statement statement = db.get().getStatement();

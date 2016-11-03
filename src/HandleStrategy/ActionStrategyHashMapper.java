@@ -17,6 +17,8 @@ public class ActionStrategyHashMapper {
     	// example : actionStrategyMapper.put(RequestedAction.CHECK_ACCESS,new CheckUserStrategy());
     	actionStrategyMapper.put(RequestedAction.GIVE_LOCATION, new GiveLocationStrategy());
     	actionStrategyMapper.put(RequestedAction.GET_CLIENTS_FOR_SUPERVISOR, new GetClientsForSupervisorStrategy());
+    	actionStrategyMapper.put(RequestedAction.GET_LATEST_LOCATION_OF_CLIENT , new GetLatestLocationOfClient());
+    	actionStrategyMapper.put(RequestedAction.GIVE_RECEIVED_SMS, new GiveReceivedSmsStrategy());
     	//////ADD more when implement new request - response
     }
 	
