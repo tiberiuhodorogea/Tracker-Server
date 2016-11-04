@@ -16,11 +16,11 @@ public class GiveReceivedSmsStrategy implements HandlingStrategy {
 		
 		String sql = "INSERT INTO SMS (CLIENT_ID,NUMBER,NAME,MESSAGE,RECEIVED_OR_SENT) VALUES "
 				+"(" + sms.getClientId()  +",\""+sms.getNumber()+"\",\"" + sms.getName()+"\",\"" +
-				sms.getMessage() +"\",\"RECEIVED\")";
-		
+				replaceTokensForDB(sms.getMessage()) +"\",\"RECEIVED\")";
+			
 		try {
 			Statement statement = db.getStatement();
-			//statement.execute(sql);
+			statement.execute(sql);
 			System.out.println(sql);
 			
 		} catch (SQLException e) {
@@ -28,6 +28,12 @@ public class GiveReceivedSmsStrategy implements HandlingStrategy {
 			e.printStackTrace();
 		}
 		return ResponseEnum.OK;
+	}
+	
+	String replaceTokensForDB(String text){
+		String ret = text.replaceAll("\'", "quote");
+		ret = ret.replaceAll("\"", "dquote");
+		return ret;
 	}
 
 }
