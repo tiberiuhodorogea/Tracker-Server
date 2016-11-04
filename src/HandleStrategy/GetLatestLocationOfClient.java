@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import SharedClasses.Objects.Client;
 import SharedClasses.Objects.LocationData;
 
 public class GetLatestLocationOfClient implements HandlingStrategy {
@@ -11,13 +12,13 @@ public class GetLatestLocationOfClient implements HandlingStrategy {
 	@Override
 	public Object handle(Object dataFromClient) {
 		LocationData ret = null;
-		String selectedClient = (String)dataFromClient;
+		Client selectedClient = (Client)dataFromClient;
 		
-		String sqlClientIdInnerSelect = "( SELECT ID FROM CLIENTS WHERE NAME = " +"\""+ selectedClient+"\"" +")";
-		String sqlSelectMaxDateInnerSql = "( SELECT MAX(DATE) FROM LOCATIONS WHERE CLIENT_ID = "+ sqlClientIdInnerSelect +" )";
+		
+		String sqlSelectMaxDateInnerSql = "( SELECT MAX(DATE) FROM LOCATIONS WHERE CLIENT_ID = "+ selectedClient.getId() +" )";
 		
 		String sql = "SELECT * FROM LOCATIONS WHERE CLIENT_ID = " 
-					+ sqlClientIdInnerSelect +" AND DATE = "+ sqlSelectMaxDateInnerSql;
+					+ selectedClient.getId() +" AND DATE = "+ sqlSelectMaxDateInnerSql;
 		//System.out.println(sql);
 		
 		try {
@@ -26,7 +27,7 @@ public class GetLatestLocationOfClient implements HandlingStrategy {
 
 			if(!resultSet.next())
 			{
-				return new LocationData(0,0,selectedClient,0);
+				return new LocationData(0,0,selectedClient.getName(),0);
 			}
 			
 			double latitude = 0;
@@ -37,7 +38,7 @@ public class GetLatestLocationOfClient implements HandlingStrategy {
 			longitude = resultSet.getDouble(5);
 			date = resultSet.getInt(3);
 			
-			ret = new LocationData(date,latitude,longitude,selectedClient,0);
+			ret = new LocationData(date,latitude,longitude,selectedClient.getName(),0);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
