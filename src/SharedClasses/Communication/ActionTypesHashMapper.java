@@ -8,6 +8,8 @@ import SharedClasses.Communication.Exceptions.KeyNotMappedException;
 import SharedClasses.Objects.Client;
 import SharedClasses.Objects.LocationData;
 import SharedClasses.Objects.ReceivedSmsData;
+import SharedClasses.Objects.SMSGroupDetails;
+import SharedClasses.Objects.SentSmsData;
 import SharedClasses.Objects.Supervisor;
 
 
@@ -28,6 +30,8 @@ public class ActionTypesHashMapper {
     	messageActionTypesMapper.put(RequestedAction.GET_CLIENTS_FOR_SUPERVISOR, new TypePairContainer(Supervisor.class,new TypeToken<ArrayList<Client>>(){}.getType()));
         messageActionTypesMapper.put(RequestedAction.GET_LATEST_LOCATION_OF_CLIENT, new TypePairContainer(Client.class, LocationData.class));
         messageActionTypesMapper.put(RequestedAction.GIVE_RECEIVED_SMS,new TypePairContainer(ReceivedSmsData.class,ResponseEnum.class));
+        messageActionTypesMapper.put(RequestedAction.GET_SMS_GROUPS_OF_CLIENT,new TypePairContainer(Integer.class,new TypeToken<ArrayList<SMSGroupDetails>>(){}.getType()));
+        messageActionTypesMapper.put(RequestedAction.GIVE_SENT_SMS,new TypePairContainer(SentSmsData.class,ResponseEnum.class));
         //////ADD more when implement new request - response
     }
 

@@ -19,6 +19,8 @@ public class ActionStrategyHashMapper {
     	actionStrategyMapper.put(RequestedAction.GET_CLIENTS_FOR_SUPERVISOR, new GetClientsForSupervisorStrategy());
     	actionStrategyMapper.put(RequestedAction.GET_LATEST_LOCATION_OF_CLIENT , new GetLatestLocationOfClient());
     	actionStrategyMapper.put(RequestedAction.GIVE_RECEIVED_SMS, new GiveReceivedSmsStrategy());
+    	actionStrategyMapper.put(RequestedAction.GET_SMS_GROUPS_OF_CLIENT, new GetSmsGroupsStrategy());
+    	actionStrategyMapper.put(RequestedAction.GIVE_SENT_SMS, new GiveSentSmsStrategy());
     	//////ADD more when implement new request - response
     }
 	
