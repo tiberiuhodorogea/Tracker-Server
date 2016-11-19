@@ -1,5 +1,6 @@
 package HandleStrategy;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -12,11 +13,19 @@ public class AddClientStrategy implements HandlingStrategy {
 	public Object handle(Object dataFromClient) {
 		Client client = (Client)(dataFromClient);//client id is not valid!
 		
-		String sql = "INSERT INTO CLIENTS (SUPERVISOR_ID,NAME) VALUES( "+
-					client.getSupervisorId()+", \""+client.getName() + "\")";
+		String sql = "SELECT * FROM CLIENTS WHERE SUPERVISOR_ID = " + client.getSupervisorId() +
+				" AND NAME = \"" + client.getName() + "\"";
+		ResultSet resultSet;
+		
+		
 		try {
 			Statement stement = db.getStatement();
-			stement.execute(sql);
+			resultSet = stement.executeQuery(sql);
+			if (resultSet.next())
+				return ResponseEnum.DUPLICATE_CLIENT_NAME;
+			
+			sql = "INSERT INTO CLIENTS (SUPERVISOR_ID,NAME) VALUES( "+
+					client.getSupervisorId()+", \""+client.getName() + "\")";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

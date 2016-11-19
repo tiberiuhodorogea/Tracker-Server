@@ -11,7 +11,7 @@ public class DeactivateClientStrategy implements HandlingStrategy {
 	@Override
 	public Object handle(Object dataFromClient) {
 		Client client = (Client)dataFromClient;
-		String sql = "UPDATE CLIENTS SET ACTIVE = 0 WHERE CLIENT_ID = " + client.getId()
+		String sql = "UPDATE CLIENTS SET ACTIVE = 0 WHERE ID = " + client.getId()
 				+" AND SUPERVISOR_ID = " + client.getSupervisorId();
 		try {
 			Statement statement = db.getStatement();

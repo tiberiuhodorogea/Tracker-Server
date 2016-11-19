@@ -5,4 +5,5 @@ package SharedClasses.Communication;
  */
 public enum ResponseEnum {
     OK,
+    DUPLICATE_CLIENT_NAME,
 }
