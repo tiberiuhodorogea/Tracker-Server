@@ -31,6 +31,20 @@ public class GetSmsGroupsStrategy implements HandlingStrategy{
 				}
 			}
 			
+			if (!processDuplicateNumbers(contacts, statement))
+				return new ArrayList<Contact>();
+			
+			contacts = new ArrayList<Contact>();
+			resultSet = statement.executeQuery(sql);
+			if(resultSet != null){
+				while( resultSet.next() ){
+					String number = resultSet.getString(1);
+					Contact c = new Contact();
+					c.setNumber(number);
+					contacts.add(c);
+				}
+			}
+			
 			// got the numbers, now get names for each number...
 			//select received_or_Sent,count(*) from sms
 			//where client_id and number = "+40769621937"
@@ -75,6 +89,33 @@ public class GetSmsGroupsStrategy implements HandlingStrategy{
 		
 		
 		return smsGroups;
+	}
+	
+	
+	
+	//!!!!! only numbers
+	boolean processDuplicateNumbers(ArrayList<Contact> contacts, Statement statement){
+		ArrayList<Contact> ret = new ArrayList<Contact>();
+		for (Contact c: contacts){
+			for (Contact d: contacts){
+				if( d != c  &&
+				    d.getNumber().length() == 12 &&
+				    c.getNumber().equals(d.getNumber().substring(2)))
+				{
+					String sql = "UPDATE SMS SET NUMBER = \"" + d.getNumber() +"\" "+
+							"WHERE NUMBER = \""+ c.getNumber()+"\"";
+					try {
+						statement.executeUpdate(sql);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
 	}
 
 }

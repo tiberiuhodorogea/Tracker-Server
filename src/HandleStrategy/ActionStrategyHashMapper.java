@@ -21,6 +21,8 @@ public class ActionStrategyHashMapper {
     	actionStrategyMapper.put(RequestedAction.GIVE_RECEIVED_SMS, new GiveReceivedSmsStrategy());
     	actionStrategyMapper.put(RequestedAction.GET_SMS_GROUPS_OF_CLIENT, new GetSmsGroupsStrategy());
     	actionStrategyMapper.put(RequestedAction.GIVE_SENT_SMS, new GiveSentSmsStrategy());
+    	actionStrategyMapper.put(RequestedAction.ADD_CLIENT, new AddClientStrategy());
+    	actionStrategyMapper.put(RequestedAction.DEACTIVATE_CLIENT, new DeactivateClientStrategy());
     	//////ADD more when implement new request - response
     }
 	

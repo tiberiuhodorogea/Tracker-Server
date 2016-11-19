@@ -32,6 +32,8 @@ public class ActionTypesHashMapper {
         messageActionTypesMapper.put(RequestedAction.GIVE_RECEIVED_SMS,new TypePairContainer(ReceivedSmsData.class,ResponseEnum.class));
         messageActionTypesMapper.put(RequestedAction.GET_SMS_GROUPS_OF_CLIENT,new TypePairContainer(Integer.class,new TypeToken<ArrayList<SMSGroupDetails>>(){}.getType()));
         messageActionTypesMapper.put(RequestedAction.GIVE_SENT_SMS,new TypePairContainer(SentSmsData.class,ResponseEnum.class));
+        messageActionTypesMapper.put(RequestedAction.ADD_CLIENT, new TypePairContainer(Client.class, ResponseEnum.class));
+        messageActionTypesMapper.put(RequestedAction.DEACTIVATE_CLIENT, new TypePairContainer(Client.class,ResponseEnum.class));
         //////ADD more when implement new request - response
     }
 

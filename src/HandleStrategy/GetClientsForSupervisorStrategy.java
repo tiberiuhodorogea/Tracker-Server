@@ -18,7 +18,7 @@ public class GetClientsForSupervisorStrategy implements HandlingStrategy {
 		Supervisor supervisor = (Supervisor) dataFromClient;
 		try {
 			Statement statement = db.get().getStatement();
-			String sql = "SELECT * FROM CLIENTS WHERE SUPERVISOR_ID = "+ supervisor.getId();
+			String sql = "SELECT * FROM CLIENTS WHERE ACTIVE = 1 AND SUPERVISOR_ID = "+ supervisor.getId();
 			
 			ResultSet resultSet = statement.executeQuery(sql);
 			
