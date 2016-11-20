@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketException;
 
+import SharedClasses.Utils.DateUtil;
+
 public class ClientManager implements Runnable{
 
 	private static int SO_TIMEOUT_MILIS = 4000;
@@ -34,7 +36,8 @@ public class ClientManager implements Runnable{
 			e.printStackTrace();
 		}
 		System.out.println("Client request read succesfully, invoking RequestHandler...");
-		System.out.println("REQUEST: "+ message);
+		System.out.println("REQUEST: "+ message + "\nTimestamp: " + DateUtil.fromIntFormat(DateUtil.nowIntFormat()));
+		
 		try {
 			client.setSoTimeout(0);
 		} catch (SocketException e) {

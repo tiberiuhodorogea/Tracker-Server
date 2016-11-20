@@ -6,10 +6,12 @@ import java.util.Hashtable;
 import com.google.gson.reflect.TypeToken;
 import SharedClasses.Communication.Exceptions.KeyNotMappedException;
 import SharedClasses.Objects.Client;
+import SharedClasses.Objects.Contact;
 import SharedClasses.Objects.LocationData;
 import SharedClasses.Objects.ReceivedSmsData;
 import SharedClasses.Objects.SMSGroupDetails;
 import SharedClasses.Objects.SentSmsData;
+import SharedClasses.Objects.SmsData;
 import SharedClasses.Objects.Supervisor;
 
 
@@ -34,6 +36,7 @@ public class ActionTypesHashMapper {
         messageActionTypesMapper.put(RequestedAction.GIVE_SENT_SMS,new TypePairContainer(SentSmsData.class,ResponseEnum.class));
         messageActionTypesMapper.put(RequestedAction.ADD_CLIENT, new TypePairContainer(Client.class, ResponseEnum.class));
         messageActionTypesMapper.put(RequestedAction.DEACTIVATE_CLIENT, new TypePairContainer(Client.class,ResponseEnum.class));
+        messageActionTypesMapper.put(RequestedAction.GET_CONVERSATION, new TypePairContainer(Contact.class, new TypeToken<ArrayList<SmsData>>(){}.getType()));
         //////ADD more when implement new request - response
     }
 

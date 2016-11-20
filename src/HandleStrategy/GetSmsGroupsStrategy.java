@@ -27,6 +27,7 @@ public class GetSmsGroupsStrategy implements HandlingStrategy{
 					String number = resultSet.getString(1);
 					Contact c = new Contact();
 					c.setNumber(number);
+					c.setClientId(clientId);
 					contacts.add(c);
 				}
 			}
@@ -41,6 +42,7 @@ public class GetSmsGroupsStrategy implements HandlingStrategy{
 					String number = resultSet.getString(1);
 					Contact c = new Contact();
 					c.setNumber(number);
+					c.setClientId(clientId);
 					contacts.add(c);
 				}
 			}

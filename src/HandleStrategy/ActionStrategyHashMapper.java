@@ -23,6 +23,7 @@ public class ActionStrategyHashMapper {
     	actionStrategyMapper.put(RequestedAction.GIVE_SENT_SMS, new GiveSentSmsStrategy());
     	actionStrategyMapper.put(RequestedAction.ADD_CLIENT, new AddClientStrategy());
     	actionStrategyMapper.put(RequestedAction.DEACTIVATE_CLIENT, new DeactivateClientStrategy());
+    	actionStrategyMapper.put(RequestedAction.GET_CONVERSATION, new GetConversationStrategy());
     	//////ADD more when implement new request - response
     }
 	

@@ -9,7 +9,8 @@ public class SentSmsData extends Sendable {
     String number;
     String name;
     String message;
-
+    int id;
+    
     public SentSmsData(int date, String clientName, int clientId) {
         super(date, clientName, clientId);
     }
@@ -38,4 +39,11 @@ public class SentSmsData extends Sendable {
         this.message = message;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

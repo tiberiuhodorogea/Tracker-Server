@@ -12,4 +12,5 @@ public enum RequestedAction {
 	GIVE_SENT_SMS,
 	ADD_CLIENT,
 	DEACTIVATE_CLIENT,
+	GET_CONVERSATION,
 }
