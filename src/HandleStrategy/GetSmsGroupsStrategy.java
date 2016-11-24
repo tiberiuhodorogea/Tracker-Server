@@ -35,11 +35,19 @@ public class GetSmsGroupsStrategy implements HandlingStrategy{
 			if (!processDuplicateNumbers(contacts, statement))
 				return new ArrayList<Contact>();
 			
+			sql = "SELECT NUMBER, MAX(DATE) FROM SMS WHERE CLIENT_ID = " + clientId +
+					" GROUP BY NUMBER ORDER BY 2 DESC";
+			
 			contacts = new ArrayList<Contact>();
+			ArrayList<Integer> latestActivityArray = new ArrayList<Integer>();//kinda hack fuck...
+			
 			resultSet = statement.executeQuery(sql);
 			if(resultSet != null){
 				while( resultSet.next() ){
 					String number = resultSet.getString(1);
+					int latestActivity = resultSet.getInt(2);
+					
+					latestActivityArray.add(latestActivity);
 					Contact c = new Contact();
 					c.setNumber(number);
 					c.setClientId(clientId);
@@ -52,14 +60,17 @@ public class GetSmsGroupsStrategy implements HandlingStrategy{
 			//where client_id and number = "+40769621937"
 				//	group by received_or_sent
 			//
+			int i = 0;
 			sql = "SELECT DISTINCT NAME FROM SMS WHERE CLIENT_ID = "+ clientId +" AND NUMBER = ";
 			for(Contact c : contacts ){
 				resultSet = statement.executeQuery(sql + "\"" + c.getNumber() + "\"");
 				while(resultSet.next()){
 					c.addName(resultSet.getString(1));
-					
 				}
+				
 				SMSGroupDetails smsGroup = new SMSGroupDetails();
+				
+				smsGroup.setLatesActivityTime(latestActivityArray.get(i++));
 				smsGroup.setContact(c);
 				smsGroup.setClientId(clientId);
 				smsGroups.add(smsGroup);
@@ -90,11 +101,35 @@ public class GetSmsGroupsStrategy implements HandlingStrategy{
 		}
 		
 		
+		removeNullContactNames(smsGroups);
+		
 		return smsGroups;
 	}
 	
 	
 	
+	
+	
+	void removeNullContactNames(ArrayList<SMSGroupDetails> smsGroups){
+		for(SMSGroupDetails smsGroup : smsGroups){
+			ArrayList<String> names = smsGroup.getContact().getNames();
+			if( names.size() == 1 && names.get(0).equals("null")){
+				names.remove(0);
+				names.add(smsGroup.getContact().getNumber());
+			}
+			
+			else if(names.size() > 1){
+				
+				for( int i = 0; i< names.size();++i){
+					if(names.get(i).equals("null")){
+						names.remove(i);
+						names.add(i,"no_name");
+					}
+				}
+			}
+			
+		}
+	}
 	//!!!!! only numbers
 	boolean processDuplicateNumbers(ArrayList<Contact> contacts, Statement statement){
 		ArrayList<Contact> ret = new ArrayList<Contact>();

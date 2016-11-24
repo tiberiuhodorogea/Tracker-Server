@@ -9,6 +9,7 @@ public class SMSGroupDetails {
     private Contact contact;
     private int sentCount;
     private int receivedCount;
+	private int latesActivityTime;
 
     public SMSGroupDetails(int clientId, Contact contact, int sentCount, int receivedCount) {
         this.clientId = clientId;
@@ -65,5 +66,13 @@ public class SMSGroupDetails {
          ret += "\n";
          ret += "received: " +receivedCount +", sent: " + sentCount;
          return  ret;
+    }
+    
+    public int getLatesActivityTime() {
+        return latesActivityTime;
+    }
+
+    public void setLatesActivityTime(int latesActivityTime) {
+        this.latesActivityTime = latesActivityTime;
     }
 }
